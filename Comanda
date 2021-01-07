@@ -1,0 +1,53 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Comanda {
+    private ArrayList<Cliente> pessoas = new ArrayList<>();
+    private ArrayList<Produto> produtos = new ArrayList<>();
+    private float total = (float) 0.0;
+
+    public static void main(String[] args) {
+
+    }
+
+    public void addCliente(String nome){
+        pessoas.add(new Cliente(nome));
+    }
+
+    public void addProduto(String nome, float preco){
+        produtos.add(new Produto(nome, preco));
+    }
+
+    public void calcularTotal() {
+        total = (float) 0.0;
+        for (Cliente cliente:pessoas) {
+            total += cliente.getConta();
+        }
+    }
+
+    public float getTotal(){
+        calcularTotal();
+        return total;
+    }
+
+    public HashMap<String, Float> getTotalPorPessoa(){
+        HashMap<String, Float> lista = new HashMap<>();
+        for (Cliente cliente:pessoas) {
+            lista.put(cliente.getNome(), cliente.getConta());
+        }
+        return lista;
+    }
+
+    public void quitarPessoa(String nome){
+        for (Cliente cliente:pessoas) {
+            if(cliente.getNome() == nome){
+                pessoas.remove(cliente);
+            }
+            calcularTotal();
+        }
+    }
+
+    public void encerrarConta(){
+
+    }
+}
